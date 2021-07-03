@@ -5,6 +5,8 @@ source "amazon-ebs" "ubuntu-amd64" {
 
   #instance_type = "c5.large"
 
+  # Spot Instance is better type as Packer's builder EC2
+
   spot_instance_types = var.spot_instance_types
   spot_price          = "auto"
 
@@ -15,16 +17,18 @@ source "amazon-ebs" "ubuntu-amd64" {
       virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["099720109477"]
+    owners      = ["099720109477"] # 099720109477 means "Ubuntu Server 16.04 LTS AMI"
   }
 
-  subnet_filter {
-    filters = {
-      "tag:Class" : "packer"
-    }
-    most_free = true
-    random    = false
-  }
+
+  # # when you comment out this part AWS just use your default VPC and subnet
+  # subnet_filter {
+  #   filters = {
+  #     "tag:Class" : "packer"
+  #   }
+  #   most_free = true
+  #   random    = false
+  # }
 
   launch_block_device_mappings {
     volume_type           = "gp2"

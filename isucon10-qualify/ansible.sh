@@ -8,7 +8,7 @@ sudo apt-get install -y --no-install-recommends ansible git
 
 GITDIR="${HOME}/isucon10-qualify"
 rm -rf ${GITDIR}
-git clone -b fixed https://github.com/matsuu/isucon10-qualify.git ${GITDIR}
+git clone -b master https://github.com/momotaro98/isucon10-q.git ${GITDIR}
 (
   cd ${GITDIR}/provisioning/ansible
   PYTHONUNBUFFERED=1 ANSIBLE_FORCE_COLOR=true ansible-playbook -i allinone, --connection=local allinone.yaml
